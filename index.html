@@ -9,9 +9,9 @@
 
     <div class="clock">
       <div class="clock-face">
-        <div class="hand hour-hand"></div>
-        <div class="hand min-hand"></div>
-        <div class="hand second-hand"></div>
+        <div class="hand hour-hand" hidden></div>
+        <div class="hand min-hand" hidden></div>
+        <div class="hand second-hand" hidden></div>
       </div>
     </div>
 
@@ -55,39 +55,30 @@
       height: 100%;
       transform: translateY(-3px); /* account for the height of the clock hands */
     }
-
+    .hand{
+      background: black;
+      transform: rotate(90deg);
+      transform-origin: 100%;
+      transition:all 0.05s;
+      transition-timing-function: cubic-bezier(0.1,1.8,0.58,1);
+      border-radius: 15px;
+      position: absolute;
+      top: 50%;
+    }
     .hour-hand {
       width: 30%;
       height: 10px;
-      background: black;
-      position: absolute;
-      top: 50%;
       left:20%;
-      transform: rotate(90deg);
-      transform-origin: 100% 50%;
-      border-radius: 15px;
       
     }
     .min-hand{
       width: 50%;
       height: 5px;
-      background: black;
-      position: absolute;
-      top: 50%;
-     
-      transform: rotate(90deg);
-      transform-origin: 100% 50%;
-      border-radius: 15px;
     }
     .second-hand{
       width: 50%;
       height: 2px;
-      background: black;
-      position: absolute;
-      top: 50%;
-      transform: rotate(90deg);
-      transform-origin: 100% 50%;
-      border-radius: 15px;
+      
     }
     
   </style>
@@ -103,7 +94,9 @@
       hourHand.style.transform=`rotate(${hDeg+90}deg)`;
       minHand.style.transform=`rotate(${mDeg+90}deg)`;
       secHand.style.transform=`rotate(${sDeg+90}deg)`;
-
+      hourHand.removeAttribute('hidden'); 
+      minHand.removeAttribute('hidden');
+      secHand.removeAttribute('hidden');
     }
 
     //Get current time, and their degree value in a 360 circle
